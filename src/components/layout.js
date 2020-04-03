@@ -1,51 +1,56 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-
+import { Global, css } from "@emotion/core"
+import "../../node_modules/normalize.css/normalize.css"
+import "typeface-libre-baskerville"
+import "typeface-lato"
 import Header from "./header"
-import "./layout.css"
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
+const Layout = ({ children }) => (
+  <>
+    <Global
+      styles={css`
+        * {
+          box-sizing: border-box;
         }
-      }
-    }
-  `)
-
-  return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    </>
-  )
-}
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
+        body {
+          background-color: #133d66;
+          color: #faf7e6;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          font-family: "Lato", sans-serif;
+          font-size: 18px;
+          line-height: 1.5;
+          letter-spacing: 1px;
+        }
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+        .container {
+          width: 100%;
+          padding: 0 15px;
+          margin: auto;
+          @media (min-width: 992px) {
+            width: 920px;
+          }
+          @media (min-width: 1200px) {
+            width: 1140px;
+          }
+          h1,
+          h2,
+          h3,
+          h4,
+          h5,
+          h6 {
+            font-family: "Libre Baskerville", serif;
+            letter-spacing: 0.2rem;
+          }
+        }
+      `}
+    />
+    <Header />
+    {children}
+  </>
+)
 
 export default Layout
